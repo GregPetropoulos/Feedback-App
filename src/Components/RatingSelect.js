@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const RatingSelect = ({select}) => {
+const RatingSelect = ({ select }) => {
   const [selected, setSelected] = useState(10);
 
   const handleChange = (e) => {
@@ -9,9 +9,9 @@ const RatingSelect = ({select}) => {
     console.log(e.currentTarget.value);
     // add + to the event to make it a number
     setSelected(+e.currentTarget.value);
-    
-    // select is a prop passed from the form, a function, we are updating that here to tell the rating piece of state the correct value selected 
-    select(+e.currentTarget.value)
+
+    // select is a prop passed from the form, a function, we are updating that here to tell the rating piece of state the correct value selected
+    select(+e.currentTarget.value);
   };
 
   return (
