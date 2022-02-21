@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
-import Header from './Components/Header';
-import FeedbackList from './Components/FeedbackList';
+import Header from './components/Header';
+import FeedbackList from './components/FeedbackList';
 import FeedbackData from './data/FeedbackData'
+import FeedbackStat from './components/FeedbackStat'
 function App() {
 
     const [feedback, setFeedback] =useState(FeedbackData)
@@ -18,6 +19,7 @@ if(window.confirm('Are you sure you want to delete this')){
     <Fragment>
       <Header/>
       <div className='container'>
+          <FeedbackStat feedback={feedback}/>
         <FeedbackList feedback={feedback} handleDelete={deleteFeedback}/>
       </div>
     </Fragment>
