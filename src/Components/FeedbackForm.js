@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Card from './shared/Card';
 import Button from './shared/Button';
 import RatingSelect from './RatingSelect';
@@ -7,7 +7,18 @@ import FeedbackContext from '../context/FeedbackContext';
 
 const FeedbackForm = () => {
   // *Context Provider state
-  const { addFeedback } = useContext(FeedbackContext);
+  const { addFeedback, feedbackEdit } = useContext(FeedbackContext);
+
+  //* UseEffect for the edit state to be watched
+  useEffect(() => {
+    console.log('hello useffect');
+    // check if edit ===true then if so disable button and update with the feedbackEdit state
+    if(feedbackEdit.edit===true){
+      setText(feedbackEdit.item.text)
+      setRating(feedbackEdit.item.rating)
+      setBtnDisabled(false);
+    }
+  }, [feedbackEdit]);
 
   // * Local state
   const [text, setText] = useState('');

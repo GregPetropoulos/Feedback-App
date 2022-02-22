@@ -1,7 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import FeedbackContext from '../context/FeedbackContext';
+
 
 const RatingSelect = ({ select }) => {
+  const {feedbackEdit } = useContext(FeedbackContext);
+
+
   const [selected, setSelected] = useState(10);
+// When the rating gets changed during the edit functionality and state update the UI here with useEffect
+  useEffect(()=>{
+setSelected(feedbackEdit.item.rating)
+  },[feedbackEdit])
 
   const handleChange = (e) => {
     // string

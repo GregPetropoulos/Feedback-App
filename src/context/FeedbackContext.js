@@ -59,7 +59,8 @@ setFeedbackEdit({
         feedback,
         deleteFeedback,
         addFeedback,
-        editFeedback
+        editFeedback,
+        feedbackEdit
       }}>
       {children}
     </FeedbackContext.Provider>
