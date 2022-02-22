@@ -1,31 +1,16 @@
 import React, { Fragment, useState } from 'react';
 import Header from './components/Header';
 import FeedbackList from './components/FeedbackList';
-import FeedbackData from './data/FeedbackData';
 import FeedbackStat from './components/FeedbackStat';
 import FeedbackForm from './components/FeedbackForm';
-import { v4 as uuidv4 } from 'uuid';
 import About from './pages/About';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AboutIconLink from './components/AboutIconLink';
+
+// * Wrapping the app in the context provider api aka global state
 import { FeedbackProvider } from './context/FeedbackContext';
+
 function App() {
-  const [feedback, setFeedback] = useState(FeedbackData);
-
-  const deleteFeedback = (id) => {
-    if (window.confirm('Are you sure you want to delete this')) {
-      setFeedback(feedback.filter((item) => item.id !== id));
-    }
-  };
-
-  const addFeedback = (newFeedback) => {
-    //*Added the uuid function to give the submitted data a unique id
-    newFeedback.id = uuidv4();
-
-    //*To add the feedback to the state set to an array and get a copy ...feedback and putting into the array, then put the new feedback at the front of the array
-    setFeedback([newFeedback, ...feedback]);
-    console.log(newFeedback);
-  };
   return (
     <FeedbackProvider>
       <Router>
@@ -38,11 +23,9 @@ function App() {
               path='/'
               element={
                 <>
-                  <FeedbackForm handleAdd={addFeedback} />
-                  <FeedbackStat  />
-                  <FeedbackList
-                    handleDelete={deleteFeedback}
-                  />
+                  <FeedbackForm />
+                  <FeedbackStat />
+                  <FeedbackList />
                 </>
               }></Route>
             <Route path='/about' element={<About />} />

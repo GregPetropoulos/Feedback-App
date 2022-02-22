@@ -2,8 +2,14 @@ import { useState } from 'react';
 import Card from './shared/Card';
 import Button from './shared/Button';
 import RatingSelect from './RatingSelect';
+import { useContext } from 'react';
+import FeedbackContext from '../context/FeedbackContext';
 
-const FeedbackForm = ({handleAdd}) => {
+const FeedbackForm = () => {
+  // *Context Provider state
+  const { addFeedback } = useContext(FeedbackContext);
+
+  // * Local state
   const [text, setText] = useState('');
   const [rating, setRating] = useState(10);
   const [btnDisabled, setBtnDisabled] = useState(true);
@@ -32,13 +38,12 @@ const FeedbackForm = ({handleAdd}) => {
       const newFeedback = {
         // text:text,
         // rating:rating
-        // shorthand jus do the below:
+        // shorthand just do the below:
         text,
         rating
       };
-    // passing it up to App.js to get passed into addFeedback
-      handleAdd(newFeedback);
-      setText('')
+      addFeedback(newFeedback);
+      setText('');
     }
   };
 
@@ -50,7 +55,6 @@ const FeedbackForm = ({handleAdd}) => {
         <div className='input-group'>
           <input
             onChange={handleTextChange}
-            // className=''
             type='text'
             placeholder='Write a review'
             value={text}
