@@ -11,7 +11,7 @@ const FeedbackForm = () => {
 
   //* UseEffect for the edit state to be watched
   useEffect(() => {
-    console.log('hello useffect');
+    // console.log('hello useffect');
     // check if edit ===true then if so disable button and update with the feedbackEdit state
     if(feedbackEdit.edit===true){
       setText(feedbackEdit.item.text)

@@ -14,7 +14,7 @@ setSelected(feedbackEdit.item.rating)
 
   const handleChange = (e) => {
     // string
-    // a string retunred by default
+    // a string returned by default
     console.log(e.currentTarget.value);
     // add + to the event to make it a number
     setSelected(+e.currentTarget.value);
