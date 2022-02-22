@@ -22,8 +22,13 @@ export const FeedbackProvider = ({ children }) => {
     }
   ]);
 
+// State to edit feedback
+const [feedbackEdit, setFeedbackEdit]= useState({
+  item:{},
+  edit:false
+})
 
-
+// Add feedback
   const addFeedback = (newFeedback) => {
     //*Added the uuid function to give the submitted data a unique id
     newFeedback.id = uuidv4();
@@ -33,19 +38,28 @@ export const FeedbackProvider = ({ children }) => {
     console.log(newFeedback);
   };
 
+  // Delete feedback
   const deleteFeedback = (id) => {
     if (window.confirm('Are you sure you want to delete this')) {
       setFeedback(feedback.filter((item) => item.id !== id));
     }
   };
 
+  // An edit function to utilize the edit state
+const editFeedback =(item)=> {
+setFeedbackEdit({
+  item,
+  edit:true
+})
+}
 
   return (
     <FeedbackContext.Provider
       value={{
         feedback,
         deleteFeedback,
-        addFeedback
+        addFeedback,
+        editFeedback
       }}>
       {children}
     </FeedbackContext.Provider>
