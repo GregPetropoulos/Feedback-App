@@ -44,7 +44,11 @@ const [feedbackEdit, setFeedbackEdit]= useState({
       setFeedback(feedback.filter((item) => item.id !== id));
     }
   };
-
+// Update feedback item, this needed so we are not just adding a new item everytime we edit
+const updateFeedback =(id,updItem)=> {
+// console.log(id,updItem);
+setFeedback(feedback.map(item=>(item.id===id? {...item, ...updItem}:item)))
+}
   // An edit function to utilize the edit state
 const editFeedback =(item)=> {
 setFeedbackEdit({
@@ -57,10 +61,11 @@ setFeedbackEdit({
     <FeedbackContext.Provider
       value={{
         feedback,
+        feedbackEdit,
         deleteFeedback,
         addFeedback,
         editFeedback,
-        feedbackEdit
+        updateFeedback
       }}>
       {children}
     </FeedbackContext.Provider>

@@ -7,7 +7,7 @@ import FeedbackContext from '../context/FeedbackContext';
 
 const FeedbackForm = () => {
   // *Context Provider state
-  const { addFeedback, feedbackEdit } = useContext(FeedbackContext);
+  const { addFeedback, feedbackEdit, updateFeedback } = useContext(FeedbackContext);
 
   //* UseEffect for the edit state to be watched
   useEffect(() => {
@@ -53,7 +53,14 @@ const FeedbackForm = () => {
         text,
         rating
       };
-      addFeedback(newFeedback);
+      // setting a conditional to update the feedback
+      if(feedbackEdit.edit===true){
+        updateFeedback(feedbackEdit.item.id, newFeedback)
+      }else{
+        // if there is nothing to be edited then just add a new feedback item
+        
+        addFeedback(newFeedback);
+      }
       setText('');
     }
   };
