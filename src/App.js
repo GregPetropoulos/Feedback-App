@@ -1,11 +1,11 @@
 import React, { Fragment} from 'react';
-import Header from './x/Header';
-import FeedbackList from './x/FeedbackList';
-import FeedbackStat from './x/FeedbackStat';
-import FeedbackForm from './x/FeedbackForm';
+import Header from './components/Header';
+import FeedbackList from './components/FeedbackList';
+import FeedbackStat from './components/FeedbackStat';
+import FeedbackForm from './components/FeedbackForm';
 import About from './pages/About';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AboutIconLink from './x/AboutIconLink';
+import AboutIconLink from './components/AboutIconLink';
 
 // * Wrapping the app in the context provider api aka global state
 import { FeedbackProvider } from './context/FeedbackContext';
