@@ -19,6 +19,11 @@
       "rating": "8",
       "text": "\"new feedback item\"",
       "id": 4
+    },
+    {
+      "text": "This is a test from adding a review through the json-server call",
+      "rating": 6,
+      "id": 5
     }
   ]
 }

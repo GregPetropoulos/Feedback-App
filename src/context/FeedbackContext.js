@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 const FeedbackContext = createContext();
 
@@ -21,7 +21,7 @@ export const FeedbackProvider = ({ children }) => {
   // Place this function in useEffect to load on first render
   const fetchFeedback = async () => {
     const response = await fetch(
-      `http://localhost:5000/feedback?_sort=id&_order=desc`
+      `/feedback?_sort=id&_order=desc`
     );
     const data = await response.json();
     console.log(data);
@@ -30,13 +30,24 @@ export const FeedbackProvider = ({ children }) => {
   };
 
   // Add feedback
-  const addFeedback = (newFeedback) => {
-    //*Added the uuid function to give the submitted data a unique id
-    newFeedback.id = uuidv4();
+  const addFeedback = async (newFeedback) => {
+// Making request to backend-json-server
+const response = await fetch('/feedback', {
+  method: 'POST',
+  headers:{
+    'Content-Type':'application/json'
+  }, 
+  body:JSON.stringify(newFeedback)
+})
+const data = await response.json()
+setFeedback([data, ...feedback])
+//IF NOT USING THE JSON SERVER
+//Added the uuid function to give the submitted data a unique id 
+ // newFeedback.id = uuidv4();
 
     //*To add the feedback to the state set to an array and get a copy ...feedback and putting into the array, then put the new feedback at the front of the array
-    setFeedback([newFeedback, ...feedback]);
-    console.log(newFeedback);
+    // setFeedback([newFeedback, ...feedback]);
+    // console.log(newFeedback);
   };
 
   // Delete feedback
