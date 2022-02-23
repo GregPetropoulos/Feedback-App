@@ -1,34 +1,35 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
-  const [feedback, setFeedback] = useState([
-    {
-      id: 1,
-      text: 'this is item 1 from context',
-      rating: 10
-    },
-    {
-      id: 2,
-      text: 'this is item 2 from context',
-      rating: 2
-    },
-    {
-      id: 3,
-      text: 'this is item 3 from context',
-      rating: 6
-    }
-  ]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [feedback, setFeedback] = useState([]);
 
-// State to edit feedback
-const [feedbackEdit, setFeedbackEdit]= useState({
-  item:{},
-  edit:false
-})
+  // State to edit feedback
+  const [feedbackEdit, setFeedbackEdit] = useState({
+    item: {},
+    edit: false
+  });
 
-// Add feedback
+  useEffect(() => {
+    fetchFeedback();
+  }, []);
+
+  // Function to use the Fetch api to get the feedback from the json server and set the state,
+  // Place this function in useEffect to load on first render
+  const fetchFeedback = async () => {
+    const response = await fetch(
+      `http://localhost:5000/feedback?_sort=id&_order=desc`
+    );
+    const data = await response.json();
+    console.log(data);
+    setFeedback(data);
+    setIsLoading(false);
+  };
+
+  // Add feedback
   const addFeedback = (newFeedback) => {
     //*Added the uuid function to give the submitted data a unique id
     newFeedback.id = uuidv4();
@@ -44,24 +45,27 @@ const [feedbackEdit, setFeedbackEdit]= useState({
       setFeedback(feedback.filter((item) => item.id !== id));
     }
   };
-// Update feedback item, this needed so we are not just adding a new item everytime we edit
-const updateFeedback =(id,updItem)=> {
-// console.log(id,updItem);
-setFeedback(feedback.map(item=>(item.id===id? {...item, ...updItem}:item)))
-}
+  // Update feedback item, this needed so we are not just adding a new item everytime we edit
+  const updateFeedback = (id, updItem) => {
+    // console.log(id,updItem);
+    setFeedback(
+      feedback.map((item) => (item.id === id ? { ...item, ...updItem } : item))
+    );
+  };
   // An edit function to utilize the edit state
-const editFeedback =(item)=> {
-setFeedbackEdit({
-  item,
-  edit:true
-})
-}
+  const editFeedback = (item) => {
+    setFeedbackEdit({
+      item,
+      edit: true
+    });
+  };
 
   return (
     <FeedbackContext.Provider
       value={{
         feedback,
         feedbackEdit,
+        isLoading,
         deleteFeedback,
         addFeedback,
         editFeedback,
