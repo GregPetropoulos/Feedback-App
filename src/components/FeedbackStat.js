@@ -9,7 +9,7 @@ function FeedbackStat() {
 
 // Simpler average calculation:
 // Calculate rating average
-const  average = Math.round(feedback.reduce((acc,{rating}) => acc + rating, 0)/feedback.length)
+const  average = Math.round(feedback.reduce((acc,{rating}) => acc + rating, 0)/feedback.length).toFixed(1)
 
   // let average =
   //   feedback.reduce((acc, curr) => {
@@ -22,10 +22,11 @@ const  average = Math.round(feedback.reduce((acc,{rating}) => acc + rating, 0)/f
 // The replace() method returns a new string with some or all matches of a pattern replaced by a replacement. The pattern can be a string or a RegExp, and the replacement can be a string or a function to be called for each match. If pattern is a string, only the first occurrence will be replaced.
 // AKA removes trailing zeros
 // average = average.toFixed(1).replace(/[.,]0$/, '');
+// average= Math.round(average)
 
   return (
-    <div className='feedback-stat'>
-      <h4>{feedback.length}{' '}Reviews</h4>
+    <div className='feedback-stats'>
+      <h4>{feedback.length} Reviews</h4>
       <h4>Average Rating: {isNaN(average) ? 0 : average}</h4>
     </div>
   );

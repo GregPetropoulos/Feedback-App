@@ -11,18 +11,13 @@
       "text": "This is feedback item2 coming from the backend"
     },
     {
-      "id": 3,
-      "rating": 6,
-      "text": "This is feedback item3 coming from the backend"
-    },
-    {
-      "rating": "8",
-      "text": "\"new feedback item\"",
+      "text": "\"new feedback item\" added an update here see if sticks to ui and backend",
+      "rating": 3,
       "id": 4
     },
     {
-      "text": "This is a test from adding a review through the json-server call",
-      "rating": 6,
+      "text": "A new item after changing the db.json rating to a number type",
+      "rating": 1,
       "id": 5
     }
   ]
